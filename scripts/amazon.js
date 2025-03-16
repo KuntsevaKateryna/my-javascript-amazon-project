@@ -45,7 +45,7 @@ products.forEach(
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-added-to-card-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
@@ -72,7 +72,6 @@ document.querySelectorAll(".js-add-to-cart")
           const productName = button.dataset.productName;
           const productId = button.dataset.productId;
           const quantitySelector = Number(document.querySelector(`.js-quantity-selector-${button.dataset.productId}`).value);
-
           let matchingItem = carts.find(item => item.productId === productId);
     
           if (matchingItem) {
@@ -97,8 +96,12 @@ document.querySelectorAll(".js-add-to-cart")
           //console.log(`cartQuantity : ${cartQuantity}`);
           document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 
-
-
-
+          //message 'Added' appears and disappears after 1.5 sec:
+         let addedProduct = document.querySelector(`.js-added-to-card-${productId}`);
+         addedProduct.classList.add("added-to-cart_clicked");
+         setTimeout( 
+          () => addedProduct.classList.remove("added-to-cart_clicked"),
+      1500
+   );           
         });
       });
