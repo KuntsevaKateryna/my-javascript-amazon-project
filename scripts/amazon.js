@@ -1,5 +1,5 @@
 console.log('Hello amazon');
-
+import {carts} from '../data/cart.js';
 
 
 let productsHTML = '';
