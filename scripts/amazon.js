@@ -1,33 +1,17 @@
 console.log('Hello amazon');
-import {carts} from '../data/cart.js';
+import {carts, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 
 
-function addToCart(productId, button) {
-  const quantitySelector = Number(
-    document.querySelector(`.js-quantity-selector-${button.dataset.productId}`)
-    .value);
-          let matchingItem = carts.find(item => item.productId === productId);
-    
-          if (matchingItem) {
-            //matchingItem.quantity = Number(matchingItem.quantity) + Number(matchingItem.quantity) //* Number(quantitySelector);
-            matchingItem.quantity *= (1 + quantitySelector);
-          } else {
-            carts.push({
-              productId: productId,
-              quantity: quantitySelector
-            });
-          }
-          console.log(carts);
-}
+
 
 function updateCartQuantity() {
   let cartQuantity = 0;
   carts.forEach(
     //function() {
     //}
-    (item) =>{
-      cartQuantity = cartQuantity + item.quantity
+    (cartItem) =>{
+      cartQuantity = cartQuantity + cartItem.quantity
     }
   );
   //console.log(`cartQuantity : ${cartQuantity}`);
