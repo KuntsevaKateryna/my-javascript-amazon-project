@@ -1,6 +1,7 @@
 console.log('Hello amazon');
 import {carts, addToCart} from '../data/cart.js';
 import {products} from '../data/products.js';
+import {getMoneyFormat} from './utils/moneyFormat.js';
 
 
 
@@ -42,7 +43,7 @@ products.forEach(
           </div>
 
           <div class="product-price">
-          $${(product.priceCents/100).toFixed(2)}
+          $${getMoneyFormat(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
