@@ -1,34 +1,24 @@
 console.log('Hello amazon');
+import {carts, addToCart} from '../data/cart.js';
+import {products} from '../data/products.js';
+import {getMoneyFormat} from './utils/moneyFormat.js';
 
-const products = [
-  {
-    image: 'images/products/athletic-cotton-socks-6-pairs.jpg',
-    name: 'Black and Gray Athletic Cotton Socks - 6 Pairs',
-    priceCents: 1090,
-    rating: {
-      stars: 4.5,
-      count: 87
+
+
+
+function updateCartQuantity() {
+  let cartQuantity = 0;
+  carts.forEach(
+    //function() {
+    //}
+    (cartItem) =>{
+      cartQuantity = cartQuantity + cartItem.quantity
     }
-  },
-  {
-    image: 'images/products/intermediate-composite-basketball.jpg',
-    name: 'Intermediate Size Basketball',
-    priceCents: 2095,
-    rating: {
-      stars: 4,
-      count: 127
-    }
-  },
-  {
-    image: 'images/products/adults-plain-cotton-tshirt-2-pack-teal.jpg',
-    name: ' Adults Plain Cotton T-Shirt - 2 Pack',
-    priceCents: 799,
-    rating: {
-      stars: 4.5,
-      count: 56
-    }
-  }
-];
+  );
+  //console.log(`cartQuantity : ${cartQuantity}`);
+  document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+}
+
 
 let productsHTML = '';
 products.forEach(
@@ -53,11 +43,11 @@ products.forEach(
           </div>
 
           <div class="product-price">
-          $${product.priceCents/100}
+          $${getMoneyFormat(product.priceCents)}
           </div>
 
           <div class="product-quantity-container">
-            <select>
+            <select class ="js-quantity-selector-${product.id}">
               <option selected value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
@@ -73,12 +63,16 @@ products.forEach(
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart js-added-to-card-${product.id}">
             <img src="images/icons/checkmark.png">
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart" 
+          data-product-name="${product.name}"
+          data-product-id="${product.id}"
+          data-product-priceCents="${product.priceCents}"
+          >
             Add to Cart
           </button>
         </div>
@@ -87,6 +81,25 @@ products.forEach(
 );
 
 document.querySelector(".js-product-grid").innerHTML = productsHTML;
-
-
-
+document.querySelectorAll(".js-add-to-cart")
+  .forEach(
+    function(button) {
+      button.addEventListener(
+        'click',
+        function() {
+          const productName = button.dataset.productName;
+          const productId = button.dataset.productId;
+         // const quantitySelector = document.querySelector(`.js-quantity-selector-${button.dataset.productId}`);
+          
+          addToCart(productId, button);
+          updateCartQuantity();
+    
+          //message 'Added' appears and disappears after 1.5 sec:
+         let addedProduct = document.querySelector(`.js-added-to-card-${productId}`);
+         addedProduct.classList.add("added-to-cart_clicked");
+         setTimeout( 
+          () => addedProduct.classList.remove("added-to-cart_clicked"),
+      1500
+   );           
+        });
+      });
