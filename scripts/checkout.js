@@ -1,4 +1,4 @@
-import {carts} from '../data/cart.js';
+import {carts, removeProductFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {getMoneyFormat} from './utils/moneyFormat.js';
 
@@ -37,7 +37,8 @@ carts.forEach((cartItem) => {
                   <span class="update-quantity-link link-primary">
                     Update
                   </span>
-                  <span class="delete-quantity-link link-primary">
+                  <span class="delete-quantity-link link-primary js-delete-quantity-link"
+                  data-product-id = "${matchedProduct.id}">
                     Delete
                   </span>
                 </div>
@@ -91,4 +92,20 @@ carts.forEach((cartItem) => {
 });
 
   console.log(cartSummaryHTML);
-  document.querySelector(".js-order-summary").innerHTML = cartSummaryHTML;
+  document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
+
+
+  document.querySelectorAll('.js-delete-quantity-link')
+    .forEach (
+      function (linka) { //linka is an association with object with this class = .js-delete-quantity-link
+        linka.addEventListener(
+          'click',
+          () =>{
+            console.log('delete');
+            const productId = linka.dataset.productId; // because property = data-product-id, so productId
+            removeProductFromCart(productId);
+            console.log(carts);
+          }
+        )
+      }
+    );
