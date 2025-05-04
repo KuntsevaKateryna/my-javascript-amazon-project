@@ -14,7 +14,8 @@ carts.forEach((cartItem) => {
   console.log(matchedProduct);
 
   cartSummaryHTML +=
-  `          <div class="cart-item-container">
+  `          <div class="cart-item-container
+              js-cart-item-container-${matchedProduct.id}">
             <div class="delivery-date">
               Delivery date: Wednesday, June 15
             </div>
@@ -105,6 +106,9 @@ carts.forEach((cartItem) => {
             const productId = linka.dataset.productId; // because property = data-product-id, so productId
             removeProductFromCart(productId);
             console.log(carts);
+
+            const containerItem = document.querySelector(`.js-cart-item-container-${productId}`);
+            containerItem.remove();
           }
         )
       }
