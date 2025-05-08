@@ -109,8 +109,8 @@ carts.forEach((cartItem) => {
 
             const containerItem = document.querySelector(`.js-cart-item-container-${productId}`);
             containerItem.remove();
-            document.querySelector(".js-checkout-count").innerHTML = `${carts.length} items`;
-            updateCartQuantity_checkout();
+            //document.querySelector(".js-checkout-count").innerHTML = `${carts.length} items`;
+            document.querySelector(".js-checkout-count").innerHTML = `${updateCartQuantity_checkout()} items`;
           }
         )
       }
@@ -128,7 +128,8 @@ carts.forEach((cartItem) => {
         }
       );
       console.log(`cartQuantity : ${cartQuantity}`);
-      document.querySelector(".js-checkout-count").innerHTML = cartQuantity;
+     // document.querySelector(".js-checkout-count").innerHTML = cartQuantity;
+     return cartQuantity;
     }
 
-    updateCartQuantity_checkout() ;
+    document.querySelector(".js-checkout-count").innerHTML = updateCartQuantity_checkout() ;
