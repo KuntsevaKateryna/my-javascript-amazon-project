@@ -4,9 +4,9 @@ import {products} from '../data/products.js';
 import {getMoneyFormat} from './utils/moneyFormat.js';
 
 
-updateCartQuantity();
 
-function updateCartQuantity() {
+
+export function updateCartQuantity() {
   let cartQuantity = 0;
   carts.forEach(
     //function() {
@@ -17,6 +17,7 @@ function updateCartQuantity() {
   );
   console.log(`cartQuantity : ${cartQuantity}`);
   document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
+  return cartQuantity;
 }
 
 
@@ -93,6 +94,7 @@ document.querySelectorAll(".js-add-to-cart")
           
           addToCart(productId, button);
           updateCartQuantity();
+          
     
           //message 'Added' appears and disappears after 1.5 sec:
          let addedProduct = document.querySelector(`.js-added-to-card-${productId}`);
@@ -103,3 +105,6 @@ document.querySelectorAll(".js-add-to-cart")
    );           
         });
       });
+
+      updateCartQuantity() ;
+      //document.querySelector(".js-cart-quantity").innerHTML = updateCartQuantity();

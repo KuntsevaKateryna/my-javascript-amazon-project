@@ -1,6 +1,8 @@
 import {carts, removeProductFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import {getMoneyFormat} from './utils/moneyFormat.js';
+//import {updateCartQuantity} from './amazon.js';
+
 
 let cartSummaryHTML = '';
 carts.forEach((cartItem) => {
@@ -109,8 +111,9 @@ carts.forEach((cartItem) => {
 
             const containerItem = document.querySelector(`.js-cart-item-container-${productId}`);
             containerItem.remove();
+            updateCartQuantity() ;
             //document.querySelector(".js-checkout-count").innerHTML = `${carts.length} items`;
-            document.querySelector(".js-checkout-count").innerHTML = `${updateCartQuantity_checkout()} items`;
+            //document.querySelector(".js-checkout-count").innerHTML = `${updateCartQuantity()} items`;
           }
         )
       }
@@ -118,7 +121,7 @@ carts.forEach((cartItem) => {
 
     //document.querySelector(".js-checkout-count").innerHTML = `${carts.length} items`;
 
-    function updateCartQuantity_checkout() {
+    /*function updateCartQuantity_checkout() {
       let cartQuantity = 0;
       carts.forEach(
         //function() {
@@ -130,6 +133,24 @@ carts.forEach((cartItem) => {
       console.log(`cartQuantity : ${cartQuantity}`);
      // document.querySelector(".js-checkout-count").innerHTML = cartQuantity;
      return cartQuantity;
+    } */
+
+    /* let var1 = updateCartQuantity() ;
+    document.querySelector(".js-checkout-count").innerHTML = var1 ;
+    console.log(`updateCartQuantity() ${var1}`);
+    */
+
+    function updateCartQuantity() {
+      let cartQuantity = 0;
+      carts.forEach(
+        (cartItem) =>{
+          cartQuantity = cartQuantity + cartItem.quantity
+        }
+      );
+      console.log(`cartQuantity : ${cartQuantity}`);
+      document.querySelector(".js-checkout-count").innerHTML =  `${cartQuantity} items`;
+      //return cartQuantity;
     }
 
-    document.querySelector(".js-checkout-count").innerHTML = updateCartQuantity_checkout() ;
+
+    updateCartQuantity() ;
