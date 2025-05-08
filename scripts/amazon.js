@@ -4,7 +4,7 @@ import {products} from '../data/products.js';
 import {getMoneyFormat} from './utils/moneyFormat.js';
 
 
-
+updateCartQuantity();
 
 function updateCartQuantity() {
   let cartQuantity = 0;
@@ -15,7 +15,7 @@ function updateCartQuantity() {
       cartQuantity = cartQuantity + cartItem.quantity
     }
   );
-  //console.log(`cartQuantity : ${cartQuantity}`);
+  console.log(`cartQuantity : ${cartQuantity}`);
   document.querySelector(".js-cart-quantity").innerHTML = cartQuantity;
 }
 

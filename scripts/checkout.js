@@ -109,7 +109,26 @@ carts.forEach((cartItem) => {
 
             const containerItem = document.querySelector(`.js-cart-item-container-${productId}`);
             containerItem.remove();
+            document.querySelector(".js-checkout-count").innerHTML = `${carts.length} items`;
+            updateCartQuantity_checkout();
           }
         )
       }
     );
+
+    //document.querySelector(".js-checkout-count").innerHTML = `${carts.length} items`;
+
+    function updateCartQuantity_checkout() {
+      let cartQuantity = 0;
+      carts.forEach(
+        //function() {
+        //}
+        (cartItem) =>{
+          cartQuantity = cartQuantity + cartItem.quantity
+        }
+      );
+      console.log(`cartQuantity : ${cartQuantity}`);
+      document.querySelector(".js-checkout-count").innerHTML = cartQuantity;
+    }
+
+    updateCartQuantity_checkout() ;
