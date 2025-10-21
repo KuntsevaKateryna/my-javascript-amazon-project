@@ -20,20 +20,20 @@ export function addToCart(productId, button) {
   const quantitySelector = Number(
     document.querySelector(`.js-quantity-selector-${button.dataset.productId}`)
     .value);
-          let matchingItem = carts.find(item => item.productId === productId);
+    let matchingItem = carts.find(item => item.productId === productId);
     
-          if (matchingItem) {
-            //matchingItem.quantity = Number(matchingItem.quantity) + Number(matchingItem.quantity) //* Number(quantitySelector);
-            matchingItem.quantity *= (1 + quantitySelector);
-          } else {
-            carts.push({
-              productId: productId,
-              quantity: quantitySelector,
-              deliveryOptionId : '2'
-            });
-          }
-          console.log(carts);
-          saveToCart();
+    if (matchingItem) {
+      //matchingItem.quantity = Number(matchingItem.quantity) + Number(matchingItem.quantity) //* Number(quantitySelector);
+      matchingItem.quantity *= (1 + quantitySelector);
+    } else {
+      carts.push({
+        productId: productId,
+        quantity: quantitySelector,
+        deliveryOptionId : '2'
+      });
+    }
+    console.log(carts);
+    saveToCart();
 }
 
 export function removeProductFromCart (productId) {
@@ -49,3 +49,27 @@ export function removeProductFromCart (productId) {
   carts = newCart;
   saveToCart();
 }
+
+export function updteProductDelivery (inputProductId, inputDeliverOptionId) {
+  //get item - product object from carts 
+  let matchingItem = carts.find(item => item.productId === inputProductId);
+  
+  matchingItem.deliverOptionId = inputDeliverOptionId;
+  saveToCart();
+}
+
+//used to make delivery date options in cart interactive
+export function updateDeliveryDate (productId1, deliveryOptionId2) {
+  //get item - product object from carts 
+  //let matchingItem = carts.find(item => item.productId === productId1);
+let matchingItem;
+carts.forEach(
+  (item)=> {
+    if (item.productId === productId1) 
+      matchingItem = item;
+  } 
+);
+matchingItem.deliveryOptionId = deliveryOptionId2;
+  saveToCart();
+}
+
