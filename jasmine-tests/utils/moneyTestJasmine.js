@@ -1,4 +1,4 @@
-import {getMoneyFormat} from '../scripts/utils/moneyFormat.js';
+import {getMoneyFormat} from '../../scripts/utils/moneyFormat.js';
 describe('Test suite: getMoneyFormat:',
   () => {
     it('convert dollars to cents',
