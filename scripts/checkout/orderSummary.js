@@ -30,7 +30,9 @@ export function displayOrderContentHTML() {
 
     cartSummaryHTML +=
     `          <div class="cart-item-container 
-                js-cart-item-container-${matchedProduct.id}"
+                js-cart-item-container-${matchedProduct.id} 
+                js-card-item-container"
+                
           >
               <div class="delivery-date">
                 Delivery date: ${deliveryString1}
@@ -47,14 +49,15 @@ export function displayOrderContentHTML() {
                   <div class="product-price">
                     $${getMoneyFormat(matchedProduct.priceCents)}
                   </div>
-                  <div class="product-quantity">
+                  <div class="product-quantity  js-product-quantity-${matchedProduct.id}">
                     <span>
                       Quantity: <span class="quantity-label">${cartItem.quantity}</span>
                     </span>
                     <span class="update-quantity-link link-primary">
                       Update
                     </span>
-                    <span class="delete-quantity-link link-primary js-delete-quantity-link"
+                    <span class="delete-quantity-link link-primary js-delete-quantity-link
+                    js-delete-quantity-link-${matchedProduct.id}"
                     data-product-id = "${matchedProduct.id}">
                       Delete
                     </span>
